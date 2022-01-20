@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: | 
+        docker version
+        # µÇÂ¼°¢ÀïÔÆ¾µÏñ²Ö¿â
+        docker login --username=${{ secrets.DOCKER_HUB_USERNAME }} --password=${{ secrets.DOCKER_HUB_PASSWORD }} docker.io
+        # Ê¹ÓÃDockerfile¹¹½¨¾µÏñ
+        docker build . --file Dockerfile --tag docker.io/aileen5150/pyhanlp-api:1.8.2
+        # ÍÆËÍ¾µÏñµ½¾µÏñ²Ö¿â
+        docker push docker.io/aileen5150/pyhanlp-api:1.8.2
