@@ -11,7 +11,7 @@ RUN apt install apt-transport-https ca-certificates wget dirmngr gnupg software-
 RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
 RUN add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 RUN apt update
-RUN apt install adoptopenjdk-8-hotspot
+RUN apt install adoptopenjdk-8-hotspot -yy
 
 EXPOSE 8765
 CMD ["hanlp","serve"] 
